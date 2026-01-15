@@ -3,7 +3,7 @@
    └─────────────────────────────────────────┘ */
 :root {
   /* ▼ ここで「var(--sidebar-width)」を一括管理！ */
-  --sidebar-width: 30rem;
+  --sidebar-width: 15rem;
 }
 /* ┌─────────────────────────────────────────┐
   │ 右側メインエリア                        │
@@ -13,8 +13,8 @@
 .fixed-bg {
   position: fixed;
   top: 0;
-  left: var(--sidebar-width);
-  width: calc(100% - var(--sidebar-width)); /* 左の固定バー分を引く */
+  left: 0;
+  width: 100%;
   height: 100vh;
   background-image: url("../img/chrome_qJcZNA8Xrm.png");
   background-size: cover; /* 要素いっぱいに広げる */
@@ -27,7 +27,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: var(--sidebar-width);
+  width: 15rem;
   height: 100vh;
 
   background-color: #f0f0f0;
@@ -35,7 +35,7 @@
   padding: 1rem;
 
   /* メインコンテンツが触れなくなったときのために高くする */
-  z-index: 100;
+  z-index: 2000;
 }
 
 /* メニューリスト 縦 */
@@ -60,38 +60,52 @@
 }
 
 /* ┌─────────────────────────────────────────┐
-   │ ハンバーガーメニュー                        │
+   │ ヘッダーハンバーガーメニュー                        │
    └─────────────────────────────────────────┘ */
+.header {
+  display: none;
+}
+
+/* 明るいHOUSEロゴ */
+.log_img {
+  position: absolute;
+  top: 0.3rem;
+  left: 2rem;
+  width: 30rem;
+  height: 7.2rem;
+  background-image: url("../img/logo.svg");
+  background-size: cover; /* 要素いっぱいに広げる */
+  background-position: center; /* 中央基準で表示 */
+}
 
 .hamburger_menu {
   position: fixed;
-  top: 2rem;
+  top: 1.5rem;
   right: 2rem;
   width: 4.5rem;
   height: 4.5rem;
   cursor: pointer;
   z-index: 1000; /* メニューが他の要素より前に表示されるようにする */
-  background-color: black;
+  background-color: white;
 }
 
 .bar {
   position: absolute;
   transition: 0.3s;
-  top: 0;
   left: 0;
-  height: 0.3rem;
+  height: 0.4rem;
   width: 100%;
-  background: white;
+  background: black;
 }
 
 .bar:nth-child(1) {
-  top: 1rem;
+  top: 0.8rem;
 }
 .bar:nth-child(2) {
-  top: 2rem;
+  top: 2.2rem;
 }
 .bar:nth-child(3) {
-  top: 3rem;
+  top: 3.6rem;
 }
 
 /* ┌─────────────────────────────────────────┐
@@ -109,11 +123,6 @@
 .hamburger_menu.open .bar:nth-child(3) {
   transform: rotate(-45deg);
   top: 2rem;
-}
-
-/* ハンバーガメニューがおされたら、サイドバーがひょうじされる */
-.hamburger_menu.open + .sidebar {
-  transform: translateX(0);
 }
 
 /* ┌─────────────────────────────────────────┐
@@ -149,10 +158,15 @@
 
   /* background-color: rgba(46, 12, 160, 0.8); */
 }
-@media screen and (max-width: 699.98px) {
+/* ┌─────────────────────────────────────────┐
+   │ レスポンシブ　　                        │
+   └─────────────────────────────────────────┘ */
+
+@media screen and (max-width: 960px) {
   :root {
     /* ▼ ここで「var(--sidebar-width)」を一括管理！ */
     --sidebar-width: 0rem;
+    --header-height: 7.2rem;
   }
 
   /* 背景の画像 */
@@ -167,6 +181,7 @@
     background-position: center; /* 中央基準で表示 */
     z-index: 1;
   }
+
   /* 左のメニューバーを非表示にする */
 
   /* 今のコード（隠れる命令） */
@@ -175,7 +190,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 30rem;
+    width: 15rem;
     height: 100vh;
     transform: translateX(-100%); /* -100% = 完全に左に隠す */
 
@@ -184,24 +199,85 @@
     padding: 1rem;
 
     /* メインコンテンツが触れなくなったときのために高くする */
-    z-index: 100;
+    z-index: 1000;
+    border: 0.5rem solid red;
   }
 
   /* ▼▼ これを足さないと戻ってこれません！ ▼▼ */
   .sidebar.active {
     transform: translateX(0); /* 0 = 元の位置 */
+    border: 0.5rem solid red;
   }
-}
 
-.content_area {
-  position: relative;
-  z-index: 10;
-  padding-top: 100vh;
-  margin-left: var(--sidebar-width); /* 左側の固定バー分の余白を確保 */
-  width: calc(100% - var(--sidebar-width)); /* 左の固定バー分を引く */
-  /* ❌ ここに色があると、上のpadding部分も白くなっちゃう */
-  /* background-color: rgba(255, 255, 255, 0.8); */
+  .hamburger_menu {
+    position: fixed;
+    top: 1.5rem;
+    right: 2rem;
+    width: 3.5rem;
+    height: 3.5rem;
+    cursor: pointer;
+    z-index: 1000; /* メニューが他の要素より前に表示されるようにする */
+    background-color: white;
+  }
 
-  /* ⭕️ なので、ここは透明にする（または行ごと消す） */
-  background-color: transparent;
+  .header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 7.2rem;
+    background-color: white;
+    z-index: 500;
+    border: 0.1rem solid red;
+    /* ▼ 変化を滑らかにする設定はここに書く */
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .header.hidden {
+    display: none;
+  }
+
+  /* 明るいHOUSEロゴ */
+  .log_img {
+    position: absolute;
+    top: 1rem;
+    left: 1rem;
+    width: 20rem;
+    height: 6rem;
+    background-image: url("../img/logo.svg");
+    background-size: cover; /* 要素いっぱいに広げる */
+    background-position: center; /* 中央基準で表示 */
+  }
+
+  .bar:nth-child(1) {
+    background: black;
+  }
+  .bar:nth-child(2) {
+    background: black;
+  }
+  .bar:nth-child(3) {
+    background: black;
+  }
+
+  /* メニューリスト 縦 */
+  .nav_list {
+    list-style: none;
+    padding: 2rem 0 0; /* 上に2remの余白を指定 */
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    align-items: flex-start;
+  }
+
+  /* レスポンシブ ハンバーガーメニューがclickされたらオーバーレイ */
+  .overlay.open {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 800;
+  }
 }
