@@ -1,7 +1,10 @@
 /* ┌─────────────────────────────────────────┐
    │ 左固定バー　　　                         │
    └─────────────────────────────────────────┘ */
-
+:root {
+  /* ▼ ここで「var(--sidebar-width)」を一括管理！ */
+  --sidebar-width: 30rem;
+}
 /* ┌─────────────────────────────────────────┐
   │ 右側メインエリア                        │
    └─────────────────────────────────────────┘ */
@@ -10,8 +13,8 @@
 .fixed-bg {
   position: fixed;
   top: 0;
-  left: 30rem;
-  width: calc(100% - 30rem); /* 左の固定バー分を引く */
+  left: var(--sidebar-width);
+  width: calc(100% - var(--sidebar-width)); /* 左の固定バー分を引く */
   height: 100vh;
   background-image: url("../img/chrome_qJcZNA8Xrm.png");
   background-size: cover; /* 要素いっぱいに広げる */
@@ -24,7 +27,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 30rem;
+  width: var(--sidebar-width);
   height: 100vh;
 
   background-color: #f0f0f0;
@@ -120,8 +123,8 @@
   position: relative;
   z-index: 10;
   padding-top: 100vh;
-  margin-left: 30rem; /* 左側の固定バー分の余白を確保 */
-  width: calc(100% - 30rem); /* 左の固定バー分を引く */
+  margin-left: var(--sidebar-width); /* 左側の固定バー分の余白を確保 */
+  width: calc(100% - var(--sidebar-width)); /* 左の固定バー分を引く */
   /* ❌ ここに色があると、上のpadding部分も白くなっちゃう */
   /* background-color: rgba(255, 255, 255, 0.8); */
 
@@ -147,12 +150,41 @@
   /* background-color: rgba(46, 12, 160, 0.8); */
 }
 @media screen and (max-width: 699.98px) {
+  :root {
+    /* ▼ ここで「var(--sidebar-width)」を一括管理！ */
+    --sidebar-width: 0rem;
+  }
+
+  /* 背景の画像 */
+  .fixed-bg {
+    position: fixed;
+    top: 0;
+    left: var(--sidebar-width);
+    width: calc(100% - var(--sidebar-width)); /* 左の固定バー分を引く */
+    height: 100vh;
+    background-image: url("../img/chrome_qJcZNA8Xrm.png");
+    background-size: cover; /* 要素いっぱいに広げる */
+    background-position: center; /* 中央基準で表示 */
+    z-index: 1;
+  }
   /* 左のメニューバーを非表示にする */
 
   /* 今のコード（隠れる命令） */
+  /* サイドバー */
   .sidebar {
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 30rem;
+    height: 100vh;
+    transform: translateX(-100%); /* -100% = 完全に左に隠す */
+
+    background-color: #f0f0f0;
+    border-right: 1px solid #ccc;
+    padding: 1rem;
+
+    /* メインコンテンツが触れなくなったときのために高くする */
+    z-index: 100;
   }
 
   /* ▼▼ これを足さないと戻ってこれません！ ▼▼ */
@@ -165,29 +197,11 @@
   position: relative;
   z-index: 10;
   padding-top: 100vh;
-  margin-left: 30rem; /* 左側の固定バー分の余白を確保 */
-  width: calc(100% - 30rem); /* 左の固定バー分を引く */
+  margin-left: var(--sidebar-width); /* 左側の固定バー分の余白を確保 */
+  width: calc(100% - var(--sidebar-width)); /* 左の固定バー分を引く */
   /* ❌ ここに色があると、上のpadding部分も白くなっちゃう */
   /* background-color: rgba(255, 255, 255, 0.8); */
 
   /* ⭕️ なので、ここは透明にする（または行ごと消す） */
   background-color: transparent;
-}
-
-.test_area {
-  /* 1. 色を「かなり透明」にする（0.8 → 0.4くらい） */
-  background-color: rgba(255, 255, 255, 0.4);
-
-  /* 2. 【魔法の1行】背景をぼかす（すりガラス効果） */
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px); /* Safari用のおまじない */
-
-  /* 3. ガラスの「縁（ふち）」をうっすらつけるとリアルになる */
-  border: 1px solid rgba(255, 255, 255, 0.6);
-
-  width: 100%;
-  height: 150rem;
-  margin: 0 auto;
-
-  /* background-color: rgba(46, 12, 160, 0.8); */
 }
