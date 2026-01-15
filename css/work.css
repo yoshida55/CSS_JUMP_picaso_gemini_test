@@ -185,7 +185,9 @@
   /* 左のメニューバーを非表示にする */
 
   /* 今のコード（隠れる命令） */
-  /* サイドバー */
+  /* ┌─────────────────────────────────────────┐
+   │ レスポンシブ　　サイドバー                  │
+   └─────────────────────────────────────────┘ */
   .sidebar {
     position: fixed;
     top: 0;
@@ -220,6 +222,19 @@
     background-color: white;
   }
 
+  .bar:nth-child(1) {
+    background: black;
+  }
+  .bar:nth-child(2) {
+    background: black;
+  }
+  .bar:nth-child(3) {
+    background: black;
+  }
+  /* ┌─────────────────────────────────────────┐
+   │ レスポンシブ　　ヘッダー　                 │
+   └─────────────────────────────────────────┘ */
+
   .header {
     position: fixed;
     top: 0;
@@ -249,16 +264,6 @@
     background-position: center; /* 中央基準で表示 */
   }
 
-  .bar:nth-child(1) {
-    background: black;
-  }
-  .bar:nth-child(2) {
-    background: black;
-  }
-  .bar:nth-child(3) {
-    background: black;
-  }
-
   /* メニューリスト 縦 */
   .nav_list {
     list-style: none;
@@ -270,6 +275,9 @@
     align-items: flex-start;
   }
 
+  /* ┌─────────────────────────────────────────┐
+   │ レスポンシブ　　オーバーレイ　                 │
+   └─────────────────────────────────────────┘ */
   /* レスポンシブ ハンバーガーメニューがclickされたらオーバーレイ */
   .overlay.open {
     position: fixed;
