@@ -148,31 +148,46 @@
 }
 @media screen and (max-width: 699.98px) {
   /* 左のメニューバーを非表示にする */
+
+  /* 今のコード（隠れる命令） */
   .sidebar {
     transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
-  /* メインエリア: 左の余白を消して横幅いっぱいに広げる */
-  .content_area {
-    margin-left: 0;
-    width: 100%;
-  }
 
-  /* 背景の画像 */
-  .fixed-bg {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100vh;
-    background-image: url("../img/chrome_qJcZNA8Xrm.png");
-    background-size: cover; /* 要素いっぱいに広げる */
-    background-position: center; /* 中央基準で表示 */
-    z-index: 1;
+  /* ▼▼ これを足さないと戻ってこれません！ ▼▼ */
+  .sidebar.active {
+    transform: translateX(0); /* 0 = 元の位置 */
   }
+}
 
-  /* 
-  .hamburger_menu.open + .sidebar {
-    transform: translateX(0);
-  } */
+.content_area {
+  position: relative;
+  z-index: 10;
+  padding-top: 100vh;
+  margin-left: 30rem; /* 左側の固定バー分の余白を確保 */
+  width: calc(100% - 30rem); /* 左の固定バー分を引く */
+  /* ❌ ここに色があると、上のpadding部分も白くなっちゃう */
+  /* background-color: rgba(255, 255, 255, 0.8); */
+
+  /* ⭕️ なので、ここは透明にする（または行ごと消す） */
+  background-color: transparent;
+}
+
+.test_area {
+  /* 1. 色を「かなり透明」にする（0.8 → 0.4くらい） */
+  background-color: rgba(255, 255, 255, 0.4);
+
+  /* 2. 【魔法の1行】背景をぼかす（すりガラス効果） */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px); /* Safari用のおまじない */
+
+  /* 3. ガラスの「縁（ふち）」をうっすらつけるとリアルになる */
+  border: 1px solid rgba(255, 255, 255, 0.6);
+
+  width: 100%;
+  height: 150rem;
+  margin: 0 auto;
+
+  /* background-color: rgba(46, 12, 160, 0.8); */
 }
