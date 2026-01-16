@@ -24,21 +24,41 @@
 
 /* サイドバー */
 .sidebar {
+  /* PCの開始はハンバーガメニューによってサイドバーを消す */
+  display: none;
+}
+
+.sidebar.active {
+  display: flex;
+  flex-direction: column;
   position: fixed;
   top: 0;
   left: 0;
-  width: 15rem;
+  width: var(--sidebar-width);
   height: 100vh;
-
   background-color: #f0f0f0;
   border-right: 1px solid #ccc;
-  padding: 1rem;
-
-  /* メインコンテンツが触れなくなったときのために高くする */
-  z-index: 2000;
+  border: 1rem solid red;
+  z-index: 100;
 }
 
-/* メニューリスト 縦 */
+/* サイドバーを押下した際に、オーバーレイを表示する */
+#overlay.open {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+}
+
+#overlay.open {
+  display: block;
+}
+
+/* サイドバーにあるメニューリスト flex 縦 */
 .nav_list {
   list-style: none;
   padding: 2rem 0 0; /* 上に2remの余白を指定 */
@@ -49,20 +69,23 @@
   align-items: flex-start;
 }
 
+/* サイドメニューのメニューリストの中の文字（HOME等） */
 .nav_item {
   font-size: 2.2rem;
 }
 
+/* サイドメニューのメニューリストのリンク（HOME等） */
 .nav_link {
   display: block; /* aタグをブロック化して余白を制御しやすくする */
   text-decoration: none;
-  color: inherit;
+  color: black;
 }
 
 /* ┌─────────────────────────────────────────┐
    │ ヘッダーハンバーガーメニュー                        │
    └─────────────────────────────────────────┘ */
 .header {
+  /* ヘッダーはPCでは最初は見せない 画面上の横*/
   display: none;
 }
 
@@ -78,6 +101,7 @@
   background-position: center; /* 中央基準で表示 */
 }
 
+/* ハンバーガーメニュー */
 .hamburger_menu {
   position: fixed;
   top: 1.5rem;

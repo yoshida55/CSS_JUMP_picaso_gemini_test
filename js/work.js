@@ -9,4 +9,6 @@ hamburger.addEventListener("click", function () {
   sidebar.classList.toggle("active");
   overlay.classList.toggle("open");
   header.classList.toggle("hidden");
+
+  console.log(sidebar.classList);
 });
